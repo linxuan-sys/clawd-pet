@@ -32,7 +32,7 @@
 - **Linux 上能用音乐模式了。** 上游只能通过 macOS 的 Core Audio 听音。`native/clawd-ears.py` 改用 `parec` 读默认输出设备的 monitor,所以在 PulseAudio 和 PipeWire 上 `/clawd music start` 都能用,跳舞、音乐条、跟着节拍冒音符全都保留。
 - **右键打开聊天,中键打开游戏**,左键仍然是跳一下。不用敲任何命令。
 - **游戏里多了一个 ✕ 退出按钮**,在分数那一行的最右边,不用只能靠中键退出。
-- **整体改名**为 `claw-pet`,并做成独立的插件市场。
+- **整体改名**为 `clawd-pet`,并做成独立的插件市场。
 
 上游 1.4.0 的功能全都在:桌面端的像素小城、游戏模式、聊天面板,以及每一段动画。
 
@@ -94,27 +94,27 @@
 在 Claude Code 里先把这个仓库添加为插件市场,再从里面安装:
 
 ```
-/plugin marketplace add linxuan-sys/claw-pet
+/plugin marketplace add linxuan-sys/clawd-pet
 ```
 
 ```
-/plugin install claw-pet@claw-pet
+/plugin install clawd-pet@clawd-pet
 ```
 
 也可以在终端里执行:
 
 ```bash
-claude plugin marketplace add linxuan-sys/claw-pet
+claude plugin marketplace add linxuan-sys/clawd-pet
 ```
 
 ```bash
-claude plugin install claw-pet@claw-pet
+claude plugin install clawd-pet@clawd-pet
 ```
 
 下次打开 Claude Code 就能看到 Clawd。以后有新版本时更新:
 
 ```bash
-claude plugin marketplace update claw-pet && claude plugin update claw-pet@claw-pet
+claude plugin marketplace update clawd-pet && claude plugin update clawd-pet@clawd-pet
 ```
 
 **从上游过来的?** 这个插件以前叫 `clawd-buddy`(更早叫 `clawd-spinner`)。先删掉那个插件和它的市场,再按上面的方法安装:
@@ -128,11 +128,11 @@ claude plugin uninstall clawd-buddy@clawd-buddy && claude plugin marketplace rem
 想改代码的话,clone 下来,带上 `--plugin-dir` 启动 Claude Code:
 
 ```bash
-git clone https://github.com/linxuan-sys/claw-pet.git ~/mods/claw-pet
+git clone https://github.com/linxuan-sys/clawd-pet.git ~/mods/clawd-pet
 ```
 
 ```bash
-claude --plugin-dir ~/mods/claw-pet
+claude --plugin-dir ~/mods/clawd-pet
 ```
 
 想让这份源码每次都加载,不用每次带参数:在 `~/.claude/settings.json` 里加上下面这段(路径换成你自己的,要写绝对路径):
@@ -140,7 +140,7 @@ claude --plugin-dir ~/mods/claw-pet
 ```json
 {
   "env": {
-    "CLAUDE_CODE_PLUGIN_DIRS": "/Users/你的用户名/mods/claw-pet"
+    "CLAUDE_CODE_PLUGIN_DIRS": "/Users/你的用户名/mods/clawd-pet"
   }
 }
 ```
@@ -187,12 +187,12 @@ Clawd 不只是看着,你还可以直接跟它说话。
 
 - **在输入框里**:`/clawd model sonnet`。只输入 `/clawd model` 可以查看现在用的是哪个。
 - **在 `/config` 里**:找到 **Chat model / 聊天模型**,选一个。
-- **在 `~/.claude/settings.json` 里**,写在插件 id 下面(从插件市场安装时是 `claw-pet@claw-pet`,用 `--plugin-dir` 加载时是 `claw-pet@inline`):
+- **在 `~/.claude/settings.json` 里**,写在插件 id 下面(从插件市场安装时是 `clawd-pet@clawd-pet`,用 `--plugin-dir` 加载时是 `clawd-pet@inline`):
 
   ```json
   {
     "pluginConfigs": {
-      "claw-pet@claw-pet": {
+      "clawd-pet@clawd-pet": {
         "options": { "chatModel": "sonnet", "chatEffort": "default" }
       }
     }
@@ -282,7 +282,7 @@ claude plugin validate .        # 静态检查:用到的事件和 API
 ```
 
 ```
-claw-pet/
+clawd-pet/
 ├── .claude-plugin/
 │   ├── plugin.json              清单:名字、版本、语言设置
 │   └── marketplace.json         让这个仓库成为可以安装的插件市场

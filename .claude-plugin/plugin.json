@@ -1,5 +1,5 @@
 {
-  "name": "claw-pet",
+  "name": "clawd-pet",
   "displayName": "Clawd Pet",
   "version": "0.1.0",
   "description": "Clawd, Claude Code's pixel mascot, lives above your prompt in the terminal and the desktop app: it acts out what Claude is doing, chats with you, dances to your music, plays a runner game, and in the desktop app idles in a little pixel San Francisco",
@@ -7,8 +7,8 @@
     "name": "Linxuan",
     "url": "https://github.com/linxuan-sys"
   },
-  "homepage": "https://github.com/linxuan-sys/claw-pet",
-  "repository": "https://github.com/linxuan-sys/claw-pet",
+  "homepage": "https://github.com/linxuan-sys/clawd-pet",
+  "repository": "https://github.com/linxuan-sys/clawd-pet",
   "keywords": [
     "mod",
     "mascot",

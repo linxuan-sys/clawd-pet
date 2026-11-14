@@ -32,7 +32,7 @@
 - **Music mode on Linux.** Upstream could only listen through Core Audio on macOS. `native/clawd-ears.py` reads the default sink's monitor with `parec` instead, so `/clawd music start` works on PulseAudio and PipeWire with the same dancing, equalizer bars and beat-synced notes.
 - **Right click opens the chat**, **middle click opens the game**, left click still hops. Nothing has to be typed to reach either.
 - **A ✕ leaves the game**, at the far right of the score row, so a middle click is not the only way out.
-- **Renamed** to `claw-pet` throughout, and packaged as its own marketplace.
+- **Renamed** to `clawd-pet` throughout, and packaged as its own marketplace.
 
 Everything from upstream 1.4.0 is here: the desktop app's pixel city, game mode, the chat pane, and every animation.
 
@@ -94,27 +94,27 @@ You need:
 In Claude Code, add this repository as a marketplace, then install the plugin from it:
 
 ```
-/plugin marketplace add linxuan-sys/claw-pet
+/plugin marketplace add linxuan-sys/clawd-pet
 ```
 
 ```
-/plugin install claw-pet@claw-pet
+/plugin install clawd-pet@clawd-pet
 ```
 
 Or from your shell:
 
 ```bash
-claude plugin marketplace add linxuan-sys/claw-pet
+claude plugin marketplace add linxuan-sys/clawd-pet
 ```
 
 ```bash
-claude plugin install claw-pet@claw-pet
+claude plugin install clawd-pet@clawd-pet
 ```
 
 Clawd appears in your next session. To get a newer release later:
 
 ```bash
-claude plugin marketplace update claw-pet && claude plugin update claw-pet@claw-pet
+claude plugin marketplace update clawd-pet && claude plugin update clawd-pet@clawd-pet
 ```
 
 **Coming from upstream?** This plugin was called `clawd-buddy` (and before that `clawd-spinner`).
@@ -129,11 +129,11 @@ claude plugin uninstall clawd-buddy@clawd-buddy && claude plugin marketplace rem
 To hack on it, clone it and start Claude Code with `--plugin-dir`:
 
 ```bash
-git clone https://github.com/linxuan-sys/claw-pet.git ~/mods/claw-pet
+git clone https://github.com/linxuan-sys/clawd-pet.git ~/mods/clawd-pet
 ```
 
 ```bash
-claude --plugin-dir ~/mods/claw-pet
+claude --plugin-dir ~/mods/clawd-pet
 ```
 
 To load your copy in every session without the flag, add this to `~/.claude/settings.json`, with your own absolute path:
@@ -141,7 +141,7 @@ To load your copy in every session without the flag, add this to `~/.claude/sett
 ```json
 {
   "env": {
-    "CLAUDE_CODE_PLUGIN_DIRS": "/Users/you/mods/claw-pet"
+    "CLAUDE_CODE_PLUGIN_DIRS": "/Users/you/mods/clawd-pet"
   }
 }
 ```
@@ -189,12 +189,12 @@ Clawd's chat has a model of its own, separate from the session's: run the sessio
 
 - **From the prompt**: `/clawd model sonnet`. Run `/clawd model` alone to see the current one.
 - **In `/config`**: find **Chat model / 聊天模型** and choose.
-- **In `~/.claude/settings.json`**, under the plugin's id (`claw-pet@claw-pet` when installed from the marketplace, `claw-pet@inline` when loaded with `--plugin-dir`):
+- **In `~/.claude/settings.json`**, under the plugin's id (`clawd-pet@clawd-pet` when installed from the marketplace, `clawd-pet@inline` when loaded with `--plugin-dir`):
 
   ```json
   {
     "pluginConfigs": {
-      "claw-pet@claw-pet": {
+      "clawd-pet@clawd-pet": {
         "options": { "chatModel": "sonnet", "chatEffort": "default" }
       }
     }
@@ -287,7 +287,7 @@ claude plugin validate .        # Static check: the events and APIs the mod uses
 ```
 
 ```
-claw-pet/
+clawd-pet/
 ├── .claude-plugin/
 │   ├── plugin.json              Manifest: name, version, the language setting
 │   └── marketplace.json         Makes this repository a marketplace you can install from

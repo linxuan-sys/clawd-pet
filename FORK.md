@@ -14,17 +14,17 @@ scene, the chat, the desktop drawing — is the author's work, untouched.
 Three changes: a rename, a Linux port of the audio helper, and mouse buttons for the
 chat and the game. Each is additive; no upstream behaviour was removed.
 
-## 1. Renamed `clawd-buddy` → `claw-pet`
+## 1. Renamed `clawd-buddy` → `clawd-pet`
 
 The plugin, the marketplace, the `$.state` namespace and every document were renamed.
 Nothing about the behaviour changed.
 
 | File | Change |
 | --- | --- |
-| `.claude-plugin/plugin.json` | `name` → `claw-pet`, `displayName` → `Clawd Pet` |
-| `.claude-plugin/marketplace.json` | marketplace `name` → `claw-pet`, plugin entry → `claw-pet`, `renames` → `{ "clawd-spinner": "claw-pet" }` |
-| `hooks/register.js` | `$.state` keys `{ plugin: 'clawd-buddy' }` → `{ plugin: 'claw-pet' }` (2 places: `chatChanged`, `session.start`) |
-| `types/index.d.ts` | `PluginState['clawd-buddy']` → `PluginState['claw-pet']` |
+| `.claude-plugin/plugin.json` | `name` → `clawd-pet`, `displayName` → `Clawd Pet` |
+| `.claude-plugin/marketplace.json` | marketplace `name` → `clawd-pet`, plugin entry → `clawd-pet`, `renames` → `{ "clawd-spinner": "clawd-pet" }` |
+| `hooks/register.js` | `$.state` keys `{ plugin: 'clawd-buddy' }` → `{ plugin: 'clawd-pet' }` (2 places: `chatChanged`, `session.start`) |
+| `types/index.d.ts` | `PluginState['clawd-buddy']` → `PluginState['clawd-pet']` |
 | `tests/clawd.test.ts` | the `plugin:` field in both fixtures |
 | `README.md`, `README.zh-CN.md`, `HANDOFF.md` | all occurrences, including the install commands |
 

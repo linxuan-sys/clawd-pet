@@ -1005,7 +1005,7 @@ async function say($, text) {
 function chatChanged($) {
   if (chat.history.length > CHAT_KEEP) chat.history.splice(0, chat.history.length - CHAT_KEEP)
   // Kept for the session in $.state too, so a reload (a /config change, say) loses none of it
-  $.state.set({ plugin: 'claw-pet', key: 'chat' }, { history: chat.history }).catch(() => {})
+  $.state.set({ plugin: 'clawd-pet', key: 'chat' }, { history: chat.history }).catch(() => {})
   $.ui.invalidate('ui.render')
   $.clock
     .sleep(100)
@@ -1165,7 +1165,7 @@ export function register(on, options) {
     }
     void readZone($)
     // The chat so far this session, should the module have just reloaded
-    const kept = await $.state.get({ plugin: 'claw-pet', key: 'chat' }).catch(() => undefined)
+    const kept = await $.state.get({ plugin: 'clawd-pet', key: 'chat' }).catch(() => undefined)
     if (kept && kept.value && Array.isArray(kept.value.history)) chat.history = kept.value.history
     await $.command.register({
       name: 'clawd',

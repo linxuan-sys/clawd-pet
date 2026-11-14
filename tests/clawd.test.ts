@@ -2,7 +2,7 @@ import { expect, mock, test } from 'claude-code/testing'
 
 // What Claude Code passes to the band's ui.render hook, apart from the app
 const BAND = {
-  plugin: 'claw-pet',
+  plugin: 'clawd-pet',
   surface: 'terminal',
   component: 'AbovePrompt',
   viewport: { columns: 100, rows: 30 },
@@ -95,7 +95,7 @@ test('/clawd chat answers in the pane and keeps the chat out of the command outp
   // Nothing of the chat goes into the transcript
   expect(answer.text).toBeUndefined()
   const pane = await $.ui.mount({
-    plugin: 'claw-pet',
+    plugin: 'clawd-pet',
     surface: 'terminal',
     component: 'Pane',
     requestId: 'clawd-chat',

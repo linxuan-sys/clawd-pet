@@ -1,9 +1,9 @@
-// The values claw-pet keeps in $.state: held by Claude Code for the session, so they
+// The values clawd-pet keeps in $.state: held by Claude Code for the session, so they
 // survive the module reloading, as it does when a /config option changes. `chat` is the chat
 // with Clawd so far.
 declare module 'claude-code' {
   interface PluginState {
-    'claw-pet': {
+    'clawd-pet': {
       chat: { history: { role: 'user' | 'clawd' | 'note'; text: string }[] }
     }
   }
