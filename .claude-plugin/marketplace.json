@@ -1,0 +1,25 @@
+{
+  "name": "claw-pet",
+  "description": "Clawd Pet: a Claude Code mod that brings Clawd, the pixel mascot, into your terminal",
+  "owner": {
+    "name": "Linxuan",
+    "url": "https://github.com/linxuan-sys"
+  },
+  "plugins": [
+    {
+      "name": "claw-pet",
+      "source": "./",
+      "description": "Clawd, Claude Code's pixel mascot, lives above your prompt: it acts out what Claude is doing, bubbles code while it types, dances to your music, and hops when you click it",
+      "category": "fun",
+      "tags": [
+        "mod",
+        "mascot",
+        "animation"
+      ],
+      "version": "0.1.0"
+    }
+  ],
+  "renames": {
+    "clawd-spinner": "claw-pet"
+  }
+}
