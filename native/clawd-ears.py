@@ -18,12 +18,10 @@ import signal
 import struct
 import subprocess
 import sys
-import time
 
 RATE = 22050
 CHUNK = RATE // 20  # 50 ms
 BYTES = CHUNK * 2
-LEVEL_STEP_DB = 6.0
 
 running = True
 
@@ -78,10 +76,18 @@ def main():
 
     out("ok")
     parent = os.getppid()
-    level = -1
-    beat_at = 0.0
-    slow = 0.0
-    last_out = 0.0
+    # The same level scale and beat detection as clawd-ears.swift: level 9 is the loudest
+    # window of the last while, so the bars follow the music and not the system volume, and
+    # a beat is a window clearly louder than the second before it, at most one every 250 ms.
+    quiet_floor = 0.003 * 32768.0  # quieter than this is silence
+    loud_floor = 0.05 * 32768.0  # the loudest recent window never drops below this
+    history = [0.0] * 20
+    at = 0
+    peak = loud_floor
+    previous = 0.0
+    since_beat = 100
+    said = (0, False)
+    quiet = 0
     try:
         while running:
             if os.getppid() != parent:
@@ -92,19 +98,24 @@ def main():
             if len(data) < BYTES:
                 data += b"\0" * (BYTES - len(data))
             samples = struct.unpack("<%dh" % CHUNK, data[:BYTES])
-            rms = math.sqrt(sum(s * s for s in samples) / CHUNK)
-            db = 20.0 * math.log10(rms / 32768.0) if rms > 1 else -90.0
-            now = time.monotonic()
-            lvl = max(0, min(9, int((db + 60.0) / LEVEL_STEP_DB)))
-            slow = slow * 0.92 + rms * 0.08 if slow else rms
-            beat = 0
-            if lvl >= 2 and rms > max(400.0, slow * 1.45) and now - beat_at > 0.18:
-                beat_at = now
-                beat = 1
-            if lvl != level or beat or now - last_out >= 1.0:
-                out("%d %d" % (lvl, beat))
-                level = lvl
-                last_out = now
+            loudness = math.sqrt(sum(s * s for s in samples) / CHUNK)
+            average = sum(history) / len(history)
+            history[at] = loudness
+            at = (at + 1) % len(history)
+            peak = max(loudness, peak * 0.998, loud_floor)
+            since_beat += 1
+            audible = loudness > quiet_floor
+            beat = audible and since_beat >= 5 and loudness > average * 1.35 and loudness > previous
+            if beat:
+                since_beat = 0
+            previous = loudness
+            # Swift rounds half away from zero; Python rounds half to even
+            level = min(9, max(1, int(loudness / peak * 9 + 0.5))) if audible else 0
+            quiet += 1
+            if level != said[0] or beat or said[1] or quiet >= 20:
+                out("%d %d" % (level, 1 if beat else 0))
+                said = (level, beat)
+                quiet = 0
     finally:
         try:
             ears.terminate()
